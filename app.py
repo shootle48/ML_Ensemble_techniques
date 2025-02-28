@@ -47,6 +47,7 @@ def predict():
                            prediction_class=prediction_class,
                            tables=[data_html],
                            titles=data.columns.values)
-
-if __name__ == '__main__':
+# ส่วนนี้เพื่อให้เราทดสอบใน local ได้
+# แต่บน Vercel จะไม่ถูกเรียก
+if __name__ == "__main__":
     app.run(debug=True)
