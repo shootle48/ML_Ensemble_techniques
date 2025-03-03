@@ -24,7 +24,7 @@ def predict():
     try:
         Glucose = float(request.form['Glucose'])
         Insulin = float(request.form['Insulin'])
-        BMI = float(request.form['BMI'])
+        BMI = float(request.form['BMI'])    
     except ValueError:
         return render_template('index.html',
                                prediction_text='กรุณากรอกข้อมูลให้ครบถ้วนและถูกต้อง',
