@@ -2,6 +2,7 @@ from flask import Flask, request, render_template
 import pickle
 import numpy as np
 import pandas as pd
+import os
 
 app = Flask(__name__)
 
@@ -13,7 +14,7 @@ with open('best_diabetes_model.pkl', 'rb') as f:
 data = pd.read_csv('diabetes2.csv')
 data_html = data.to_html(classes='dataframe', header="true", index=False)
 
-@app.route('/')
+@app.route('/', methods=['GET'])
 def home():
     return render_template('index.html', tables=[data_html], titles=data.columns.values)
 
@@ -47,7 +48,7 @@ def predict():
                            prediction_class=prediction_class,
                            tables=[data_html],
                            titles=data.columns.values)
-# ส่วนนี้เพื่อให้เราทดสอบใน local ได้
-# แต่บน Vercel จะไม่ถูกเรียก
+
+# สำหรับ Vercel Serverless Functions
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 8080)))
