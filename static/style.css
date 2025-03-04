@@ -180,6 +180,14 @@ input[type="submit"]:hover,
   color: #ffffff;
 }
 
+.caption-table{
+  font-size: 1.2rem;
+  color: #ffffff;
+  text-align: center;
+  margin: 1rem;
+  font-weight: semi-bold;
+}
+
 .table-container {
   margin-top: 3rem;
   width: 100%;
