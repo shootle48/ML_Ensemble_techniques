@@ -6,6 +6,17 @@
   padding: 0;
 }
 
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 body {
   font-family: 'Kanit', sans-serif;
   background: linear-gradient(135deg, #278acb, #a7e3ff);
@@ -15,6 +26,7 @@ body {
   align-items: center;
   min-height: 100vh;
   padding: 20px;
+  animation: fadeIn 1s ease-in-out;
 }
 
 .container {
@@ -36,13 +48,20 @@ header h1 {
   color: #345091;
 }
 
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
 header img{
-  width: 250px;
-  height: 250px;
+  width: 200px;
+  height: 200px;
   border:#278acb 1px solid;
   padding: 20px;
   border-radius: 50%;
   margin-bottom: 10px;
+  animation: float 3s ease-in-out infinite;
 }
 
 form {
@@ -68,6 +87,8 @@ input[type='text'] {
 input[type='text']:focus {
   outline: none;
   border-color: #278acb;
+  box-shadow: 0 0 10px rgba(255, 105, 180, 0.8);
+  transition: 0.3s;
 }
 
 input[type='submit'], .toggle-btn {
@@ -80,10 +101,23 @@ input[type='submit'], .toggle-btn {
   cursor: pointer;
   transition: 0.3s;
   font-weight: semi-bold;
+  transition: transform 0.3s ease, background 0.3s ease;
 }
 
 input[type='submit']:hover, .toggle-btn:hover {
   background: linear-gradient(135deg, #278acb, #ff1493);
+  transform: scale(1.05);
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .prediction {
@@ -93,6 +127,7 @@ input[type='submit']:hover, .toggle-btn:hover {
   margin-top: 20px;
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  animation: slideUp 0.6s ease-in-out;
 }
 
 .prediction.positive {
