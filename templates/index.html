@@ -11,7 +11,7 @@
   <body>
     <div class="container">
       <header>
-        <img src="static/logo.png" alt="" />
+        <img src="static/logo.png" alt="logo" />
         <h1>ทำนายเบาหวานด้วยโมเดล</h1>
         <h1>Logistic Regression</h1>
       </header>
@@ -20,7 +20,12 @@
           <form action="/predict" method="post">
             <!-- รับข้อมูลเฉพาะฟีเจอร์ที่โมเดลต้องการ -->
             <div>
-              <label for="Glucose">ระดับน้ำตาลในเลือด (mg/dL) → เช่น 90:</label>
+              <div class="reset">
+                <label for="Glucose"
+                  >ระดับน้ำตาลในเลือด (mg/dL) → เช่น 90:</label
+                >
+                <button id="reset-btn" type="button">ล้างค่า</button>
+              </div>
               <input type="text" id="Glucose" name="Glucose" required />
             </div>
 
@@ -35,7 +40,6 @@
             </div>
 
             <input type="submit" value="Predict" />
-            <!-- ปุ่มสำหรับแสดง/ซ่อนตาราง -->
             <button id="toggle-table-btn" class="toggle-btn" type="button">
               แสดงข้อมูลตาราง
             </button>
@@ -48,14 +52,14 @@
           {% endif %}
         </div>
 
-        <div>
-          <div
-            id="table-container"
-            class="table-container"
-            style="display: none"
-          >
-            {% for table in tables %} {{ table|safe }} {% endfor %}
-          </div>
+        <div id="table-container" class="table-container" style="display: none">
+          {% for table in tables %}
+          <div class="dataframe">{{ table|safe }}</div>
+          {% endfor %}
+        </div>
+        <div class="qrcode">
+          <label for="">สแกนเพื่อใช้งานใน LINE</label>
+          <img src="static/qrcode.png" alt="QRCode" />
         </div>
       </main>
     </div>

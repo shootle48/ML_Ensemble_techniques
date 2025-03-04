@@ -1,10 +1,12 @@
-// static/script.js
-
-// เพิ่มการตรวจสอบฟอร์มก่อนส่ง
 document.addEventListener("DOMContentLoaded", function () {
   const form = document.querySelector("form");
+  const resetBtn = document.getElementById("reset-btn");
+  const toggleTableBtn = document.getElementById("toggle-table-btn");
+  const tableContainer = document.getElementById("table-container");
+  const dataTable = document.querySelector(".dataframe"); // ดึงตารางที่ Flask เรนเดอร์มา
+
+  // ตรวจสอบการกรอกข้อมูลก่อนส่งฟอร์ม
   form.addEventListener("submit", function (event) {
-    // ตรวจสอบว่าฟิลด์ทั้งหมดถูกกรอกหรือไม่
     const inputs = form.querySelectorAll('input[type="text"]');
     let valid = true;
     inputs.forEach(function (input) {
@@ -21,13 +23,15 @@ document.addEventListener("DOMContentLoaded", function () {
       alert("กรุณากรอกข้อมูลให้ครบถ้วน");
     }
   });
-});
 
-// เพิ่มการทำงานของปุ่มแสดง/ซ่อนตาราง
-document.addEventListener("DOMContentLoaded", function () {
-  const toggleTableBtn = document.getElementById("toggle-table-btn");
-  const tableContainer = document.getElementById("table-container");
+  // ปุ่มล้างค่าฟอร์ม
+  resetBtn.addEventListener("click", function () {
+    document.getElementById("Glucose").value = "";
+    document.getElementById("Insulin").value = "";
+    document.getElementById("BMI").value = "";
+  });
 
+  // แสดง/ซ่อนตาราง
   toggleTableBtn.addEventListener("click", function () {
     if (tableContainer.style.display === "none") {
       tableContainer.style.display = "block";
@@ -37,4 +41,19 @@ document.addEventListener("DOMContentLoaded", function () {
       toggleTableBtn.textContent = "แสดงข้อมูลตาราง";
     }
   });
+
+  // เลือกข้อมูลจากตารางไปเติมลงในฟอร์ม
+  if (dataTable) {
+    dataTable.addEventListener("click", function (event) {
+      const row = event.target.closest("tr");
+      if (row) {
+        const cells = row.getElementsByTagName("td");
+        if (cells.length >= 3) {
+          document.getElementById("Glucose").value = cells[1].textContent;
+          document.getElementById("Insulin").value = cells[4].textContent;
+          document.getElementById("BMI").value = cells[5].textContent;
+        }
+      }
+    });
+  }
 });
