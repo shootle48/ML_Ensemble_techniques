@@ -37,10 +37,10 @@ def predict():
     # ทำนายผลด้วยโมเดลที่บันทึกไว้
     prediction = model.predict(input_features)
     if prediction[0] == 1:
-        outcome = 'เป็นเบาหวาน'
+        outcome = 'เป็นเบาหวาน🥹'
         prediction_class = 'positive'
     else:
-        outcome = 'ไม่เป็นเบาหวาน'
+        outcome = 'ไม่เป็นเบาหวาน😊'
         prediction_class = 'negative'
 
     return render_template('index.html',

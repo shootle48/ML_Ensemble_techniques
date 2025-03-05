@@ -10,6 +10,8 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 import pandas as pd
 from sklearn_genetic import GAFeatureSelectionCV
+import pickle
+from sklearn.metrics import accuracy_score, f1_score, precision_score, recall_score
 
 data = pd.read_csv("diabetes2.csv")
 #data.head()
@@ -40,9 +42,6 @@ VOTE_model = VotingClassifier(estimators=models, voting='hard')
 VOTE_model.fit(X_train, y_train)
 y_pred = VOTE_model.predict(X_test)
 print(accuracy_score(y_test, y_pred))
-
-import pickle
-from sklearn.metrics import accuracy_score, f1_score, precision_score, recall_score
 
 # 1. ประเมินประสิทธิภาพของแต่ละโมเดล
 best_model = None
@@ -82,12 +81,12 @@ for name, model in models:
 
 print(f"\nBest model: {best_model_name} with accuracy {best_score:.4f}")
 
-# 2. บันทึกโมเดลที่ดีที่สุดด้วย pickle
-with open('best_diabetes_model.pkl', 'wb') as file:
-    pickle.dump(best_model, file)
+# # 2. บันทึกโมเดลที่ดีที่สุดด้วย pickle
+# with open('best_diabetes_model.pkl', 'wb') as file:
+#     pickle.dump(best_model, file)
 
-# 3. สำหรับ voting model
-with open('voting_diabetes_model.pkl', 'wb') as file:
-    pickle.dump(VOTE_model, file)
+# # 3. สำหรับ voting model
+# with open('voting_diabetes_model.pkl', 'wb') as file:
+#     pickle.dump(VOTE_model, file)
 
-print("Models saved successfully!")
+# print("Models saved successfully!")
